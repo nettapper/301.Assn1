@@ -17,34 +17,12 @@ public class MainActivity extends AppCompatActivity {
         initOnClickListeners();
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
     private void initOnClickListeners() {
         Button main_onePlayer = (Button) findViewById(R.id.main_onePlayer);
         main_onePlayer.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Oct 1 2015, Rudi Kershaw, http://stackoverflow.com/questions/24610527/how-do-i-get-a-button-to-open-another-activity-in-android-studio
-                startActivity(new Intent(MainActivity.this, OnePlayer.class));
+                startActivity(new Intent(MainActivity.this, OnePlayerActivity.class));
             }
         });
 
@@ -52,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
         main_twoPlayer.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Oct 1 2015, Rudi Kershaw, http://stackoverflow.com/questions/24610527/how-do-i-get-a-button-to-open-another-activity-in-android-studio
-                startActivity(new Intent(MainActivity.this, TwoPlayer.class));
+                startActivity(new Intent(MainActivity.this, TwoPlayerActivity.class));
             }
         });
 
@@ -60,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
         main_threePlayer.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Oct 1 2015, Rudi Kershaw, http://stackoverflow.com/questions/24610527/how-do-i-get-a-button-to-open-another-activity-in-android-studio
-                startActivity(new Intent(MainActivity.this, ThreePlayer.class));
+                startActivity(new Intent(MainActivity.this, ThreePlayerActivity.class));
             }
         });
 
@@ -68,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
         main_fourPlayer.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Oct 1 2015, Rudi Kershaw, http://stackoverflow.com/questions/24610527/how-do-i-get-a-button-to-open-another-activity-in-android-studio
-                startActivity(new Intent(MainActivity.this, FourPlayer.class));
+                startActivity(new Intent(MainActivity.this, FourPlayerActivity.class));
             }
         });
 
@@ -76,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
         main_Stats.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Oct 1 2015, Rudi Kershaw, http://stackoverflow.com/questions/24610527/how-do-i-get-a-button-to-open-another-activity-in-android-studio
-                startActivity(new Intent(MainActivity.this, Stats.class));
+                startActivity(new Intent(MainActivity.this, StatsActivity.class));
             }
         });
     }
