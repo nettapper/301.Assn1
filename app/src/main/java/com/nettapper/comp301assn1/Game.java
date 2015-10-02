@@ -27,23 +27,30 @@ public class Game {
         }
         */
 
-        // set the initial time var
+        // set the initial time var & offset the time to be when the user sees the color change
         // Oct 1 2015, Kevin Bourrillion, http://stackoverflow.com/questions/1770010/how-do-i-measure-time-elapsed-in-java
-        startTime = System.nanoTime();
+        startTime = System.nanoTime() + sleepTime * 1000000; // 1 ns = 1 ms * 10^(6)
 
         return sleepTime;
     }
     public int stop(Player player) throws InvalidKeyException {
+        // don't want to record more than one time per game
+        if(startTime == 0 && sleepTime == 0){
+            return -1;
+        }
         // get the current time
-        // calc diff between current time and init time
         long stopTime = System.nanoTime();
+        // calc diff between current time and init time
         long diff = Math.abs((stopTime - startTime));
-        diff = diff / 1000000;  // diff is now in ms
-        if((int) diff < sleepTime) {
+        diff = diff / 1000000;  // 1 ns * 10^(-6) = 1 ms
+        if(stopTime < startTime) {
             throw new InvalidKeyException();
         }
         player.addTime(((int) diff));
         player.incBuzzerWon();
+
+        startTime = 0;
+        sleepTime = 0;
 
         return (int) diff;
     }

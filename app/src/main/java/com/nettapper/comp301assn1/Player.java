@@ -9,16 +9,6 @@ public class Player {
     private Statistics stat = new Statistics();
     private Integer buzzersWon = 0;
 
-    public String FILENAME;
-
-    public Player(String fileName){
-        FILENAME = fileName;
-    }
-
-    public String fileName(){
-        return FILENAME;
-    }
-
     public void addTime(Integer t){
         stat.addTime(t);
     }

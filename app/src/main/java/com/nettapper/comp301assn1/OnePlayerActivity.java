@@ -37,6 +37,7 @@ public class OnePlayerActivity extends AppCompatActivity {
     }
 
     private void playGame(){
+        final RecordManager recMan = new RecordManager();
         final Button onePlayerButton = (Button) findViewById(R.id.onePlayer_clickMe);
         // Oct 1 2015, Hamzeh Soboh, http://stackoverflow.com/questions/12615720/setbackgroundcolor-in-android
         onePlayerButton.setBackgroundColor(Color.BLUE);
@@ -48,7 +49,13 @@ public class OnePlayerActivity extends AppCompatActivity {
             public void onClick(View v) {
                 // after user input stop game
                 try {
-                    int yourTime = game.stop(new Player(""));
+                    // Player player = recMan.load(openFileOutput("player1.sav", 0));
+                    Player player = new Player();
+                    int yourTime = game.stop(player);
+                    if (yourTime < 0){ // additional button presses shouldn't count
+                        return;
+                    }
+                    // Oct 2 2015, http://examples.javacodegeeks.com/core-java/lang/string/java-string-format-example/
                     String message = String.format("Your time was %d ms.", yourTime);
                     Toast.makeText(OnePlayerActivity.this, message, Toast.LENGTH_LONG).show();
                 } catch (Exception e) {
@@ -59,6 +66,7 @@ public class OnePlayerActivity extends AppCompatActivity {
             }
         });
     }
+    // Oct 2 2015, Kevin Cruijssen, http://stackoverflow.com/questions/24928589/android-make-button-change-color-after-a-specified-time
     private void changeColor(final Button b, int delay){
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
@@ -67,6 +75,7 @@ public class OnePlayerActivity extends AppCompatActivity {
             }
         }, delay);
     }
+    // end of Kevin Cruijssen
 }
 
 
