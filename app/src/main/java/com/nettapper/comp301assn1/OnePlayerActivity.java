@@ -2,12 +2,10 @@ package com.nettapper.comp301assn1;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.graphics.Color;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -19,7 +17,6 @@ public class OnePlayerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_one_player);
         runTutorial();
-        playGame();
     }
 
     private void runTutorial(){
@@ -30,7 +27,7 @@ public class OnePlayerActivity extends AppCompatActivity {
         alertDialogBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface arg0, int arg1) {
-                Toast.makeText(OnePlayerActivity.this, "Starting the game!", Toast.LENGTH_LONG).show();
+                playGame();
             }
         });
 
@@ -40,23 +37,35 @@ public class OnePlayerActivity extends AppCompatActivity {
     }
 
     private void playGame(){
-        Button onePlayerButton = (Button) findViewById(R.id.onePlayer_clickMe);
+        final Button onePlayerButton = (Button) findViewById(R.id.onePlayer_clickMe);
         // Oct 1 2015, Hamzeh Soboh, http://stackoverflow.com/questions/12615720/setbackgroundcolor-in-android
         onePlayerButton.setBackgroundColor(Color.BLUE);
         final Game game = new Game();
-        game.start();
-
-        // change button color
-        // Oct 1 2015, Hamzeh Soboh, http://stackoverflow.com/questions/12615720/setbackgroundcolor-in-android
-        onePlayerButton.setBackgroundColor(Color.GREEN);
+        int delay = game.start();
+        changeColor(onePlayerButton, delay);
 
         onePlayerButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // after user input stop game
-                game.stop(new Player(""));
-                Toast.makeText(OnePlayerActivity.this, "Time has been recorded.", Toast.LENGTH_LONG).show();
+                try {
+                    int yourTime = game.stop(new Player(""));
+                    String message = String.format("Your time was %d ms.", yourTime);
+                    Toast.makeText(OnePlayerActivity.this, message, Toast.LENGTH_LONG).show();
+                } catch (Exception e) {
+                    Toast.makeText(OnePlayerActivity.this, "Too Early!", Toast.LENGTH_LONG).show();
+                    onePlayerButton.setBackgroundColor(Color.RED);
+                    runTutorial();
+                }
             }
         });
+    }
+    private void changeColor(final Button b, int delay){
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            public void run() {
+                b.setBackgroundColor(Color.GREEN);
+            }
+        }, delay);
     }
 }
 
