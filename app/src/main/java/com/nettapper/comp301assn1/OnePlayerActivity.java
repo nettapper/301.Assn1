@@ -44,9 +44,10 @@ public class OnePlayerActivity extends AppCompatActivity {
     private void playGame(){
         final Button onePlayerButton = (Button) findViewById(R.id.onePlayer_clickMe);
         // Oct 1 2015, Hamzeh Soboh, http://stackoverflow.com/questions/12615720/setbackgroundcolor-in-android
-        onePlayerButton.setBackgroundColor(Color.BLUE);
+        onePlayerButton.setBackgroundColor(Color.LTGRAY);
         final Game game = new Game();
         int delay = game.start();
+        onePlayerButton.setText("Wait for it");
         changeColor(onePlayerButton, delay);
 
         onePlayerButton.setOnClickListener(new View.OnClickListener() {
@@ -75,6 +76,7 @@ public class OnePlayerActivity extends AppCompatActivity {
         handler.postDelayed(new Runnable() {
             public void run() {
                 b.setBackgroundColor(Color.GREEN);
+                b.setText("CLICK ME");
             }
         }, delay);
     }
