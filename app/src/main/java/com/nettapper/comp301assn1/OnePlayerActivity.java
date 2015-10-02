@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.security.InvalidKeyException;
 
 public class OnePlayerActivity extends AppCompatActivity {
@@ -56,12 +57,13 @@ public class OnePlayerActivity extends AppCompatActivity {
                 try {
                     Player player = getPlayer("player1.sav");
                     int yourTime = game.stop(player);
-                    if (yourTime < 0){ // additional button presses shouldn't count
+                    if (yourTime < 0) { // additional button presses shouldn't count
                         return;
                     }
                     // Oct 2 2015, http://examples.javacodegeeks.com/core-java/lang/string/java-string-format-example/
                     String message = String.format("Your time was %d ms.", yourTime);
                     Toast.makeText(OnePlayerActivity.this, message, Toast.LENGTH_LONG).show();
+                    savePlayer(player, "player1.sav");
                 } catch (InvalidKeyException e) {
                     Toast.makeText(OnePlayerActivity.this, "Too Early!", Toast.LENGTH_LONG).show();
                     onePlayerButton.setBackgroundColor(Color.RED);
@@ -70,6 +72,7 @@ public class OnePlayerActivity extends AppCompatActivity {
             }
         });
     }
+
     // Oct 2 2015, Kevin Cruijssen, http://stackoverflow.com/questions/24928589/android-make-button-change-color-after-a-specified-time
     private void changeColor(final Button b, int delay){
         Handler handler = new Handler();
@@ -94,6 +97,18 @@ public class OnePlayerActivity extends AppCompatActivity {
         }
         return player;
     }
+
+    private void savePlayer(Player player, String fileName) {
+        RecordManager recMan = new RecordManager();
+        FileOutputStream fos = null;
+        try {
+            fos = openFileOutput(fileName, 0);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        recMan.save(player, fos);
+    }
+
 }
 
 
