@@ -44,10 +44,7 @@ public class StatsActivity extends AppCompatActivity {
             player = new Player();
         }
         player = new Player();  // todo: make above work
-        statsToDisplay.add(String.format("Avg 10: %d", player.getStats().averageTime(10)));
-        statsToDisplay.add(String.format("Max 10: %d", player.getStats().maxTime(10)));
-        statsToDisplay.add(String.format("Min 10: %d", player.getStats().minTime(10)));
-        statsToDisplay.add(String.format("Med 10: %d", player.getStats().medianTime(10)));
+        statsToDisplay = player.getReactionStats();
     }
 
     @Override
