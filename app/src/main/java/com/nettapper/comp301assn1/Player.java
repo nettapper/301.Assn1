@@ -24,4 +24,8 @@ public class Player {
     public void reset(){
         stat.reset();
     }
+
+    public Statistics getStats(){
+        return stat;
+    }
 }
