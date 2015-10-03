@@ -45,10 +45,14 @@ public class Statistics {
     public Double averageTime(Integer ofLast){
         int i = 0;
         double sum = 0;
+        double avg = -1;
         for(i = 0; i < times.size() && i < ofLast; i++){
             sum += times.get(i);
         }
-        return sum / i;
+        if(i > 0){  // no numbers to work with
+            avg = sum / i;
+        }
+        return avg;
     }
     public Integer medianTime(Integer ofLast){
         ArrayList<Integer> copy = new ArrayList<>();
