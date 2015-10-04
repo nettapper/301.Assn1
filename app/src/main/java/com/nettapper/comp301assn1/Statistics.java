@@ -22,8 +22,8 @@ public class Statistics {
             min = times.get(0);  // the min should start as the first element
         }
         for(int i = 0; i < times.size() && i < ofLast; i++){
-            if(min > times.get(0)){
-                min = times.get(0);
+            if(min > times.get(i)){
+                min = times.get(i);
             }
         }
         return min;
@@ -34,8 +34,8 @@ public class Statistics {
             max = times.get(0);  // the max should start as the first element
         }
         for(int i = 0; i < times.size() && i < ofLast; i++){
-            if(max < times.get(0)){
-                max = times.get(0);
+            if(max < times.get(i)){
+                max = times.get(i);
             }
         }
         return max;

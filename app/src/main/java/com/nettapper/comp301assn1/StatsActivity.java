@@ -14,6 +14,7 @@ import java.util.ArrayList;
 
 public class StatsActivity extends AppCompatActivity {
     private ArrayList<String> statsToDisplay = new ArrayList<>();
+    ArrayAdapter<String> adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +29,7 @@ public class StatsActivity extends AppCompatActivity {
         super.onStart();
         ListView lv = (ListView) findViewById(R.id.stats_vertLinLayout);
         loadFromFile();
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+        adapter = new ArrayAdapter<String>(this,
                 R.layout.list_item, statsToDisplay);
         lv.setAdapter(adapter);
         adapter.notifyDataSetChanged();
@@ -72,10 +73,13 @@ public class StatsActivity extends AppCompatActivity {
             RecordManager recMan = new RecordManager();
             try {
                 recMan.save(new Player(), openFileOutput("player.sav", 0));
+                onStart();
+                return true;
             } catch (FileNotFoundException e) {
-                return false;
+                statsToDisplay = new ArrayList<>();
+                onStart();
             }
-            return true;
+            return false;
         }
 
         return super.onOptionsItemSelected(item);
