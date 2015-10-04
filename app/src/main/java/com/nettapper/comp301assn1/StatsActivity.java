@@ -1,5 +1,6 @@
 package com.nettapper.comp301assn1;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,6 +18,7 @@ import java.util.ArrayList;
 public class StatsActivity extends AppCompatActivity {
     private ArrayList<String> statsToDisplay = new ArrayList<>();
     ArrayAdapter<String> adapter;
+    Boolean isOnReactionStats = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,11 +58,13 @@ public class StatsActivity extends AppCompatActivity {
     }
 
     private void loadReactionStats() {
+        isOnReactionStats = true;
         ArrayList<Player> players = getPlayers("player.sav");
         statsToDisplay = players.get(0).getReactionStats();
     }
 
     private void loadBuzzerStats() {
+        isOnReactionStats = false;
         ArrayList<Player> players = getPlayers("player.sav");
         statsToDisplay = new ArrayList<>();
 
@@ -125,10 +129,20 @@ public class StatsActivity extends AppCompatActivity {
                     empty.add(new Player());
                 }
                 recMan.save(empty, openFileOutput("player.sav", 0));
+                if(isOnReactionStats){
+                    loadReactionStats();
+                } else {
+                    loadBuzzerStats();
+                }
                 onStart();
                 return true;
             } catch (FileNotFoundException e) {
                 statsToDisplay = new ArrayList<>();
+                if(isOnReactionStats){
+                    loadReactionStats();
+                } else {
+                    loadBuzzerStats();
+                }
                 onStart();
             }
             return false;
