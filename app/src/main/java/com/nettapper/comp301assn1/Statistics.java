@@ -26,20 +26,18 @@ public class Statistics {
                 min = times.get(0);
             }
         }
-
         return min;
     }
     public Integer maxTime(Integer ofLast){
         int max = -1;
         if (times.size() >= 1){
-            max = times.get(0);  // the min should start as the first element
+            max = times.get(0);  // the max should start as the first element
         }
         for(int i = 0; i < times.size() && i < ofLast; i++){
             if(max < times.get(0)){
                 max = times.get(0);
             }
         }
-
         return max;
     }
     public Double averageTime(Integer ofLast){
@@ -66,4 +64,12 @@ public class Statistics {
         }
         return med;
     }
+
+   public ArrayList<String> getTimes(){
+       ArrayList<String> temp = new ArrayList<>();
+       for(int i = 0; i < times.size(); i++){
+           temp.add(times.get(i).toString());
+       }
+       return temp;
+   }
 }

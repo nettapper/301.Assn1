@@ -64,7 +64,7 @@ public class OnePlayerActivity extends AppCompatActivity {
                 }
                 // after user input stop game
                 try {
-                    Player player = getPlayer("player1.sav");
+                    Player player = getPlayer("player.sav");
                     int yourTime = game.stop(player);
                     if (yourTime < 0) { // additional button presses shouldn't count
                         return;
@@ -72,7 +72,7 @@ public class OnePlayerActivity extends AppCompatActivity {
                     // Oct 2 2015, http://examples.javacodegeeks.com/core-java/lang/string/java-string-format-example/
                     String message = String.format("Your time was %d ms.", yourTime);
                     Toast.makeText(OnePlayerActivity.this, message, Toast.LENGTH_LONG).show();
-                    savePlayer(player, "player1.sav");
+                    savePlayer(player, "player.sav");
                     modifyButton(onePlayerButton, 0, "Play Again?", Color.GREEN);
                 } catch (InvalidKeyException e) {
                     Toast.makeText(OnePlayerActivity.this, "Too Early!", Toast.LENGTH_LONG).show();

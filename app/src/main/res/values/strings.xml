@@ -2,10 +2,10 @@
     <string name="app_name">Comp301.Assn1</string>
 
     <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
     <string name="title_activity_one_player">One Player</string>
     <string name="title_activity_two_player">Two Player</string>
     <string name="title_activity_three_player">Three Player</string>
     <string name="title_activity_four_player">Four Player</string>
     <string name="title_activity_stats">Stats</string>
+    <string name="action_clear_stats">Clear Stats</string>
 </resources>

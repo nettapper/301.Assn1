@@ -40,6 +40,10 @@ public class Player {
         al.add(String.format("Min 100: %d", stat.minTime(100)));
         al.add(String.format("Med 100: %d", stat.medianTime(100)));
 
+        al.add("");  // space out the stats for looks
+
+        al.addAll(stat.getTimes());  // insert the raw data
+
         return al;
     }
 }

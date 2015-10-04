@@ -36,7 +36,7 @@ public class StatsActivity extends AppCompatActivity {
     }
 
     private void loadFromFile() {
-        Player player = getPlayer("player1.sav");
+        Player player = getPlayer("player.sav");
         statsToDisplay = player.getReactionStats();
     }
 
@@ -68,7 +68,13 @@ public class StatsActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_clear_stats) {
+            RecordManager recMan = new RecordManager();
+            try {
+                recMan.save(new Player(), openFileOutput("player.sav", 0));
+            } catch (FileNotFoundException e) {
+                return false;
+            }
             return true;
         }
 
