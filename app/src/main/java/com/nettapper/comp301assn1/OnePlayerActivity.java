@@ -14,6 +14,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.security.InvalidKeyException;
+import java.util.ArrayList;
 
 public class OnePlayerActivity extends AppCompatActivity {
 
@@ -64,15 +65,15 @@ public class OnePlayerActivity extends AppCompatActivity {
                 }
                 // after user input stop game
                 try {
-                    Player player = getPlayer("player.sav");
-                    int yourTime = game.stop(player);
+                    ArrayList<Player> players = getPlayers("player.sav");
+                    int yourTime = game.stop(players.get(0));
                     if (yourTime < 0) { // additional button presses shouldn't count
                         return;
                     }
                     // Oct 2 2015, http://examples.javacodegeeks.com/core-java/lang/string/java-string-format-example/
                     String message = String.format("Your time was %d ms.", yourTime);
                     Toast.makeText(OnePlayerActivity.this, message, Toast.LENGTH_LONG).show();
-                    savePlayer(player, "player.sav");
+                    savePlayer(players, "player.sav");
                     modifyButton(onePlayerButton, 0, "Play Again?", Color.GREEN);
                 } catch (InvalidKeyException e) {
                     Toast.makeText(OnePlayerActivity.this, "Too Early!", Toast.LENGTH_LONG).show();
@@ -99,20 +100,23 @@ public class OnePlayerActivity extends AppCompatActivity {
     }
     // end of Kevin Cruijssen
 
-    private Player getPlayer(String fileName){
+    private ArrayList<Player> getPlayers(String fileName){
         RecordManager recMan = new RecordManager();
         FileInputStream fis = null;
-        Player player = new Player();
+        ArrayList<Player> players = new ArrayList<Player>();
+        for(int i = 0; i < 4; i++){   // I want the default ret val to be 4 players
+            players.add(i, new Player());
+        }
         try {
             fis = openFileInput(fileName);
-            player = recMan.load(fis);
+            players = recMan.load(fis);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        return player;
+        return players;
     }
 
-    private void savePlayer(Player player, String fileName) {
+    private void savePlayer(ArrayList<Player> players, String fileName) {
         RecordManager recMan = new RecordManager();
         FileOutputStream fos = null;
         try {
@@ -120,7 +124,7 @@ public class OnePlayerActivity extends AppCompatActivity {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        recMan.save(player, fos);
+        recMan.save(players, fos);
     }
 
 }

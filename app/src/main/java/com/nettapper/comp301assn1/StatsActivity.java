@@ -37,21 +37,24 @@ public class StatsActivity extends AppCompatActivity {
     }
 
     private void loadFromFile() {
-        Player player = getPlayer("player.sav");
-        statsToDisplay = player.getReactionStats();
+        ArrayList<Player> players = getPlayers("player.sav");
+        statsToDisplay = players.get(0).getReactionStats();
     }
 
-    private Player getPlayer(String fileName){
+    private ArrayList<Player> getPlayers(String fileName){
         RecordManager recMan = new RecordManager();
         FileInputStream fis = null;
-        Player player = new Player();
+        ArrayList<Player> players = new ArrayList<>();
+        for(int i = 0; i < 4; i++) {   // I want the default ret val to be 4 players
+            players.add(i, new Player());
+        }
         try {
             fis = openFileInput(fileName);
-            player = recMan.load(fis);
+            players = recMan.load(fis);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        return player;
+        return players;
     }
 
     @Override
@@ -72,7 +75,11 @@ public class StatsActivity extends AppCompatActivity {
         if (id == R.id.action_clear_stats) {
             RecordManager recMan = new RecordManager();
             try {
-                recMan.save(new Player(), openFileOutput("player.sav", 0));
+                ArrayList<Player> empty = new ArrayList<>();
+                for(int i = 0; i < 4; i++){
+                    empty.add(new Player());
+                }
+                recMan.save(empty, openFileOutput("player.sav", 0));
                 onStart();
                 return true;
             } catch (FileNotFoundException e) {
