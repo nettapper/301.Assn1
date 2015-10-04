@@ -12,16 +12,17 @@
         android:text="Player 1"
         android:id="@+id/fourPlayer.PlayerOne"
         android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true" />
+        android:width="160dp"
+        android:height="230dp" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Player 2"
         android:id="@+id/fourPlayer.PlayerTwo"
-        android:layout_below="@+id/fourPlayer.PlayerOne"
-        android:layout_alignParentStart="true"
-        android:layout_alignEnd="@+id/fourPlayer.PlayerOne" />
+        android:layout_alignParentBottom="true"
+        android:width="160dp"
+        android:height="230dp" />
 
     <Button
         android:layout_width="wrap_content"
@@ -29,14 +30,17 @@
         android:text="Player 3"
         android:id="@+id/fourPlayer.PlayerThree"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="48dp"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:width="160dp"
+        android:height="230dp" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Player 4"
         android:id="@+id/fourPlayer.PlayerFour"
-        android:layout_below="@+id/fourPlayer.PlayerThree"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:width="160dp"
+        android:height="230dp" />
 </RelativeLayout>

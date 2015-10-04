@@ -13,7 +13,8 @@
         android:id="@+id/threePlayer.PlayerOne"
         android:layout_alignParentTop="true"
         android:layout_alignStart="@+id/threePlayer.PlayerTwo"
-        android:layout_alignEnd="@+id/threePlayer.PlayerTwo" />
+        android:layout_alignEnd="@+id/threePlayer.PlayerTwo"
+        android:height="150dp" />
 
     <Button
         android:layout_width="wrap_content"
@@ -22,7 +23,8 @@
         android:id="@+id/threePlayer.PlayerTwo"
         android:layout_centerVertical="true"
         android:layout_alignEnd="@+id/threePlayer.PlayerThree"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:height="150dp" />
 
     <Button
         android:layout_width="wrap_content"
@@ -31,5 +33,6 @@
         android:id="@+id/threePlayer.PlayerThree"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:height="150dp" />
 </RelativeLayout>

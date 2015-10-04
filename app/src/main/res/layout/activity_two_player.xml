@@ -13,7 +13,8 @@
         android:id="@+id/twoPlayer.PlayerOne"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:height="230dp" />
 
     <Button
         android:layout_width="wrap_content"
@@ -22,5 +23,6 @@
         android:id="@+id/twoPlayer.PlayerTwo"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:height="230dp" />
 </RelativeLayout>
