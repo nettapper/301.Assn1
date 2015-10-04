@@ -10,11 +10,13 @@ import android.view.View;
 import android.widget.Button;
 
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 
 public class TwoPlayerActivity extends AppCompatActivity {
     Buzzer buz;
     ArrayList<Player> players;
+    Integer gameid = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +28,7 @@ public class TwoPlayerActivity extends AppCompatActivity {
     protected void onStart(){
         super.onStart();
         buz = new Buzzer();
+        buz.start();
         RecordManager recMan = new RecordManager();
         try {
             players = recMan.load(openFileInput("player.sav"));
@@ -38,17 +41,32 @@ public class TwoPlayerActivity extends AppCompatActivity {
 
         one.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                buz.stop(players.get(0));
-                displayWinner("Player 1 Won");
+                if (buz.stop(players.get(0), gameid)) {
+                    displayWinner("Player 1 Won");
+                    savePlayer(players, "player.sav");
+                }
             }
         });
 
         two.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                buz.stop(players.get(1));
-                displayWinner("Player 2 Won");
+                if (buz.stop(players.get(1), gameid)) {
+                    displayWinner("Player 2 Won");
+                    savePlayer(players, "player.sav");
+                }
             }
         });
+    }
+
+    private void savePlayer(ArrayList<Player> players, String fileName) {
+        RecordManager recMan = new RecordManager();
+        FileOutputStream fos = null;
+        try {
+            fos = openFileOutput(fileName, 0);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        recMan.save(players, fos);
     }
 
     private void displayWinner(String message) {

@@ -1,5 +1,7 @@
 package com.nettapper.comp301assn1;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 
 /**
@@ -7,18 +9,30 @@ import java.util.ArrayList;
  */
 public class Player {
     private Statistics stat = new Statistics();
-    private Integer buzzersWon = 0;
+    private ArrayList<Integer> buzzersWon = new ArrayList<>();
+
+    public Player(){
+        for(int i = 0; i < 4; i++){
+            buzzersWon.add(i, 0);
+        }
+    }
 
     public void addTime(Integer t){
         stat.addTime(t);
     }
 
-    public void incBuzzerWon(){
-        buzzersWon++;
+    public void incBuzzerWon(int gameid){
+        try {
+            Log.d("Player Debug", "we set");
+            buzzersWon.set(gameid, buzzersWon.get(gameid) + 1);
+        } catch (IndexOutOfBoundsException e){
+            Log.d("Player Debug", "we added");
+            buzzersWon.add(gameid, 1);
+        }
     }
 
-    public Integer getBuzzersWon(){
-        return buzzersWon;
+    public Integer getBuzzersWon(int index){
+        return buzzersWon.get(index);
     }
 
     public void reset(){

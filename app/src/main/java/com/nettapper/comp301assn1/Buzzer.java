@@ -9,9 +9,13 @@ public class Buzzer {
     public void start(){
         gameRunning = true;
     }
-    public void stop(Player player){
-        player.incBuzzerWon();
-        gameRunning = false;
+    public Boolean stop(Player player, int gameid){
+        if(gameRunning){
+            player.incBuzzerWon(gameid);
+            gameRunning = false;
+            return true;
+        }
+        return false;
     }
     public void reset(){
         gameRunning = false;

@@ -5,7 +5,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 
 import java.io.FileInputStream;
@@ -20,6 +22,7 @@ public class StatsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stats);
+        loadReactionStats();
     }
 
 
@@ -28,17 +31,59 @@ public class StatsActivity extends AppCompatActivity {
         // Oct 2 2015, Joshua Campbell, https://github.com/nettapper/lonelyTwitter/blob/4bf7fba49ee31d203ef37a27740e94f289532844/app/src/main/java/ca/ualberta/cs/lonelytwitter/LonelyTwitterActivity.java
         super.onStart();
         ListView lv = (ListView) findViewById(R.id.stats_vertLinLayout);
-        loadFromFile();
         adapter = new ArrayAdapter<String>(this,
                 R.layout.list_item, statsToDisplay);
         lv.setAdapter(adapter);
         adapter.notifyDataSetChanged();
         // end Joshua Campbell
+
+        Button reactionStats = (Button) findViewById(R.id.stats_reactionGame);
+        Button buzzerStats = (Button) findViewById(R.id.stats_buzzerStats);
+
+        reactionStats.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                loadReactionStats();
+                onStart();
+            }
+        });
+
+        buzzerStats.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                loadBuzzerStats();
+                onStart();
+            }
+        });
     }
 
-    private void loadFromFile() {
+    private void loadReactionStats() {
         ArrayList<Player> players = getPlayers("player.sav");
         statsToDisplay = players.get(0).getReactionStats();
+    }
+
+    private void loadBuzzerStats() {
+        ArrayList<Player> players = getPlayers("player.sav");
+        statsToDisplay = new ArrayList<>();
+
+        statsToDisplay.add("One Player Games:");
+        statsToDisplay.add(String.format("Player 1: %d", players.get(0).getBuzzersWon(0)));
+        statsToDisplay.add("");  // new line for formatting
+
+        statsToDisplay.add("Two Player Games:");
+        statsToDisplay.add(String.format("Player 1: %d", players.get(0).getBuzzersWon(1)));
+        statsToDisplay.add(String.format("Player 2: %d", players.get(1).getBuzzersWon(1)));
+        statsToDisplay.add("");  // new line for formatting
+
+        statsToDisplay.add("Three Player Games:");
+        statsToDisplay.add(String.format("Player 1: %d", players.get(0).getBuzzersWon(2)));
+        statsToDisplay.add(String.format("Player 2: %d", players.get(1).getBuzzersWon(2)));
+        statsToDisplay.add(String.format("Player 2: %d", players.get(2).getBuzzersWon(2)));
+        statsToDisplay.add("");  // new line for formatting
+
+        statsToDisplay.add("Four Player Games:");
+        statsToDisplay.add(String.format("Player 1: %d", players.get(0).getBuzzersWon(3)));
+        statsToDisplay.add(String.format("Player 2: %d", players.get(1).getBuzzersWon(3)));
+        statsToDisplay.add(String.format("Player 2: %d", players.get(2).getBuzzersWon(3)));
+        statsToDisplay.add(String.format("Player 2: %d", players.get(3).getBuzzersWon(3)));
     }
 
     private ArrayList<Player> getPlayers(String fileName){

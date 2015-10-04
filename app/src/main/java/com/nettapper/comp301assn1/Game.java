@@ -47,7 +47,7 @@ public class Game {
             throw new InvalidKeyException();
         }
         player.addTime(((int) diff));
-        player.incBuzzerWon();
+        player.incBuzzerWon(0);
 
         reset(); // nedd to zero ou the times
         return (int) diff;
