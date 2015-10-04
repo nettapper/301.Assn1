@@ -36,15 +36,21 @@ public class StatsActivity extends AppCompatActivity {
     }
 
     private void loadFromFile() {
-        RecordManager recMan = new RecordManager();
-        Player player;
-        try {
-            player = recMan.load(new FileInputStream("player1.sav"));
-        } catch (FileNotFoundException e) {
-            player = new Player();
-        }
-        player = new Player();  // todo: make above work
+        Player player = getPlayer("player1.sav");
         statsToDisplay = player.getReactionStats();
+    }
+
+    private Player getPlayer(String fileName){
+        RecordManager recMan = new RecordManager();
+        FileInputStream fis = null;
+        Player player = new Player();
+        try {
+            fis = openFileInput(fileName);
+            player = recMan.load(fis);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        return player;
     }
 
     @Override
