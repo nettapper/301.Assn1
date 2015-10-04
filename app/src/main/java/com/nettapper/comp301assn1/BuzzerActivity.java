@@ -3,42 +3,43 @@ package com.nettapper.comp301assn1;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
-public class MainActivity extends AppCompatActivity {
+public class BuzzerActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_buzzer);
         initOnClickListeners();
     }
 
     private void initOnClickListeners() {
-        Button main_onePlayer = (Button) findViewById(R.id.main_onePlayer);
-        main_onePlayer.setOnClickListener(new View.OnClickListener() {
+        Button buzzer_twoPlayer = (Button) findViewById(R.id.buzzer_TwoPlayer);
+        buzzer_twoPlayer.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Oct 1 2015, Rudi Kershaw, http://stackoverflow.com/questions/24610527/how-do-i-get-a-button-to-open-another-activity-in-android-studio
-                startActivity(new Intent(MainActivity.this, OnePlayerActivity.class));
+                startActivity(new Intent(BuzzerActivity.this, TwoPlayerActivity.class));
             }
         });
 
-        Button main_Buzzer = (Button) findViewById(R.id.main_Buzzer);
-        main_Buzzer.setOnClickListener(new View.OnClickListener() {
+        Button buzzer_threePlayer = (Button) findViewById(R.id.buzzer_ThreePlayer);
+        buzzer_threePlayer.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Oct 1 2015, Rudi Kershaw, http://stackoverflow.com/questions/24610527/how-do-i-get-a-button-to-open-another-activity-in-android-studio
-                startActivity(new Intent(MainActivity.this, BuzzerActivity.class));
+                startActivity(new Intent(BuzzerActivity.this, ThreePlayerActivity.class));
             }
         });
 
-        Button main_Stats = (Button) findViewById(R.id.main_Stats);
-        main_Stats.setOnClickListener(new View.OnClickListener() {
+        Button buzzer_fourPlayer = (Button) findViewById(R.id.buzzer_FourPlayer);
+        buzzer_fourPlayer.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Oct 1 2015, Rudi Kershaw, http://stackoverflow.com/questions/24610527/how-do-i-get-a-button-to-open-another-activity-in-android-studio
-                startActivity(new Intent(MainActivity.this, StatsActivity.class));
+                startActivity(new Intent(BuzzerActivity.this, FourPlayerActivity.class));
             }
         });
     }
-
 }

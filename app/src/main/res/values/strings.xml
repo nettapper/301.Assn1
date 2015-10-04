@@ -8,4 +8,6 @@
     <string name="title_activity_four_player">Four Player</string>
     <string name="title_activity_stats">Stats</string>
     <string name="action_clear_stats">Clear Stats</string>
+    <string name="title_activity_buzzer">Buzzer Activity</string>
+    <string name="action_settings">Settings</string>
 </resources>

@@ -36,6 +36,10 @@
             android:name=".StatsActivity"
             android:label="@string/title_activity_stats" >
         </activity>
+        <activity
+            android:name=".BuzzerActivity"
+            android:label="@string/title_activity_buzzer" >
+        </activity>
     </application>
 
 </manifest>
