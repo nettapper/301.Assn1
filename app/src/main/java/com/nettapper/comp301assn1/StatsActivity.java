@@ -76,14 +76,14 @@ public class StatsActivity extends AppCompatActivity {
         statsToDisplay.add("Three Player Games:");
         statsToDisplay.add(String.format("Player 1: %d", players.get(0).getBuzzersWon(2)));
         statsToDisplay.add(String.format("Player 2: %d", players.get(1).getBuzzersWon(2)));
-        statsToDisplay.add(String.format("Player 2: %d", players.get(2).getBuzzersWon(2)));
+        statsToDisplay.add(String.format("Player 3: %d", players.get(2).getBuzzersWon(2)));
         statsToDisplay.add("");  // new line for formatting
 
         statsToDisplay.add("Four Player Games:");
         statsToDisplay.add(String.format("Player 1: %d", players.get(0).getBuzzersWon(3)));
         statsToDisplay.add(String.format("Player 2: %d", players.get(1).getBuzzersWon(3)));
-        statsToDisplay.add(String.format("Player 2: %d", players.get(2).getBuzzersWon(3)));
-        statsToDisplay.add(String.format("Player 2: %d", players.get(3).getBuzzersWon(3)));
+        statsToDisplay.add(String.format("Player 3: %d", players.get(2).getBuzzersWon(3)));
+        statsToDisplay.add(String.format("Player 4: %d", players.get(3).getBuzzersWon(3)));
     }
 
     private ArrayList<Player> getPlayers(String fileName){
