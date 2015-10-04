@@ -6,7 +6,6 @@ import android.graphics.Color;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -37,6 +36,14 @@ public class OnePlayerActivity extends AppCompatActivity {
             }
         });
 
+        // need to run the game in this case as well
+        alertDialogBuilder.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialog) {
+                playGame();
+            }
+        });
+
         AlertDialog alertDialog = alertDialogBuilder.create();
         alertDialog.show();
         // End of Tutorialspoint
@@ -44,15 +51,17 @@ public class OnePlayerActivity extends AppCompatActivity {
 
     private void playGame(){
         final Button onePlayerButton = (Button) findViewById(R.id.onePlayer_clickMe);
-        // Oct 1 2015, Hamzeh Soboh, http://stackoverflow.com/questions/12615720/setbackgroundcolor-in-android
-        onePlayerButton.setBackgroundColor(Color.LTGRAY);
         final Game game = new Game();
         int delay = game.start();
-        onePlayerButton.setText("Wait for it");
-        changeColor(onePlayerButton, delay);
+        modifyButton(onePlayerButton, 0, "Wait...", Color.LTGRAY);
+        final Handler clickMeHandler = modifyButton(onePlayerButton, delay, "CLICK ME", Color.GREEN);
 
         onePlayerButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                // is this the second time playing?
+                if (onePlayerButton.getText().equals("Play Again?")) {
+                    playGame();
+                }
                 // after user input stop game
                 try {
                     Player player = getPlayer("player1.sav");
@@ -64,24 +73,29 @@ public class OnePlayerActivity extends AppCompatActivity {
                     String message = String.format("Your time was %d ms.", yourTime);
                     Toast.makeText(OnePlayerActivity.this, message, Toast.LENGTH_LONG).show();
                     savePlayer(player, "player1.sav");
+                    modifyButton(onePlayerButton, 0, "Play Again?", Color.GREEN);
                 } catch (InvalidKeyException e) {
                     Toast.makeText(OnePlayerActivity.this, "Too Early!", Toast.LENGTH_LONG).show();
-                    onePlayerButton.setBackgroundColor(Color.RED);
-                    runTutorial();
+                    // Oct 3 2015, Raghunandan, http://stackoverflow.com/questions/22718951/stop-handler-postdelay
+                    clickMeHandler.removeCallbacksAndMessages(null);
+                    game.reset(); // dont want this to be recorded
+                    modifyButton(onePlayerButton, 0, "Play Again?", Color.RED);
                 }
             }
         });
     }
 
     // Oct 2 2015, Kevin Cruijssen, http://stackoverflow.com/questions/24928589/android-make-button-change-color-after-a-specified-time
-    private void changeColor(final Button b, int delay){
+    private Handler modifyButton(final Button b, int delay, final String text, final int color){
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             public void run() {
-                b.setBackgroundColor(Color.GREEN);
-                b.setText("CLICK ME");
+                // Oct 1 2015, Hamzeh Soboh, http://stackoverflow.com/questions/12615720/setbackgroundcolor-in-android
+                b.setBackgroundColor(color);
+                b.setText(text);
             }
         }, delay);
+        return handler;
     }
     // end of Kevin Cruijssen
 

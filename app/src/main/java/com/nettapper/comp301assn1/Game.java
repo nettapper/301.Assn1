@@ -49,12 +49,11 @@ public class Game {
         player.addTime(((int) diff));
         player.incBuzzerWon();
 
-        startTime = 0;
-        sleepTime = 0;
-
+        reset(); // nedd to zero ou the times
         return (int) diff;
     }
     public void reset(){
-
+        startTime = 0;
+        sleepTime = 0;
     }
 }
