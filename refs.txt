@@ -5,4 +5,6 @@ Oct 1 2015, http://www.tutorialspoint.com/android/android_alert_dialoges.htm
 Oct 1 2015, Hamzeh Soboh, http://stackoverflow.com/questions/12615720/setbackgroundcolor-in-android
 Oct 2 2015, Kevin Cruijssen, http://stackoverflow.com/questions/24928589/android-make-button-change-color-after-a-specified-time
 Oct 2 2015, http://examples.javacodegeeks.com/core-java/lang/string/java-string-format-example/
+Oct 2 2015, Joshua Campbell, https://github.com/nettapper/lonelyTwitter/blob/4bf7fba49ee31d203ef37a27740e94f289532844/app/src/main/java/ca/ualberta/cs/lonelytwitter/LonelyTwitterActivity.java
+Oct 3 2015, Raghunandan, http://stackoverflow.com/questions/22718951/stop-handler-postdelay
 Oct 4 2015, becomputer06, http://stackoverflow.com/questions/8701634/send-email-intent

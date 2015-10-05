@@ -1,9 +1,5 @@
 package com.nettapper.comp301assn1;
 
-import android.graphics.Color;
-import android.util.Log;
-import android.widget.Button;
-
 import java.security.InvalidKeyException;
 import java.util.Random;
 
@@ -18,14 +14,6 @@ public class Game {
         // wait rand time between 10 ms and 2000 ms
         Random r = new Random();
         int sleepTime = (int)(1990 * r.nextDouble() + 10);
-        // Oct 1 2015, Konrad Garus, http://stackoverflow.com/questions/3342651/how-can-i-delay-a-java-program-for-a-few-seconds
-        /*
-        try {
-            Thread.sleep(sleepTime);  // time is in ms
-        } catch(InterruptedException ex) {
-            Thread.currentThread().interrupt();
-        }
-        */
 
         // set the initial time var & offset the time to be when the user sees the color change
         // Oct 1 2015, Kevin Bourrillion, http://stackoverflow.com/questions/1770010/how-do-i-measure-time-elapsed-in-java
