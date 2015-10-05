@@ -3,7 +3,6 @@ package com.nettapper.comp301assn1;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -126,7 +125,6 @@ public class StatsActivity extends AppCompatActivity {
             intent.setType("text/html");
             intent.putExtra(Intent.EXTRA_SUBJECT, "My awesome stats!");
             String body = stringify(statsToDisplay);
-            Log.d("Stats A", body);
             intent.putExtra(Intent.EXTRA_TEXT, body);
 
             startActivity(Intent.createChooser(intent, "Send Email"));
