@@ -36,5 +36,6 @@ proguard/
 *.log
 
 
-# ignore dia backup files
+# ignore dia files
 *.dia~
+*.dia
