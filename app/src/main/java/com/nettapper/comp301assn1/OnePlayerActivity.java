@@ -33,7 +33,6 @@ public class OnePlayerActivity extends AppCompatActivity {
         alertDialogBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface arg0, int arg1) {
-                playGame();
             }
         });
 
@@ -41,7 +40,7 @@ public class OnePlayerActivity extends AppCompatActivity {
         alertDialogBuilder.setOnDismissListener(new DialogInterface.OnDismissListener() {
             @Override
             public void onDismiss(DialogInterface dialog) {
-                playGame();
+                playGame();  // need to always run the game
             }
         });
 
