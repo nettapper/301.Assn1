@@ -3,4 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools" tools:context="com.nettapper.comp301assn1.StatsActivity">
     <item android:id="@+id/action_clear_stats" android:title="@string/action_clear_stats"
         android:orderInCategory="100" app:showAsAction="never" />
+    <item android:id="@+id/action_send_email" android:title="@string/action_send_email"
+        android:orderInCategory="100" app:showAsAction="never" />
 </menu>

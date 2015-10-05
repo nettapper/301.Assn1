@@ -120,6 +120,19 @@ public class StatsActivity extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
+        if (id == R.id.action_send_email) {
+            // Oct 4 2015, becomputer06, http://stackoverflow.com/questions/8701634/send-email-intent
+            Intent intent = new Intent(Intent.ACTION_SEND);
+            intent.setType("text/html");
+            intent.putExtra(Intent.EXTRA_SUBJECT, "My awesome stats!");
+            String body = stringify(statsToDisplay);
+            Log.d("Stats A", body);
+            intent.putExtra(Intent.EXTRA_TEXT, body);
+
+            startActivity(Intent.createChooser(intent, "Send Email"));
+            // end of becomputer06
+        }
+
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_clear_stats) {
             RecordManager recMan = new RecordManager();
@@ -149,5 +162,14 @@ public class StatsActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private String stringify(ArrayList<String> statsToDisplay) {
+        String longString = "";
+        for(int i = 0; i < statsToDisplay.size(); i++){
+            longString = longString.concat(statsToDisplay.get(i));
+            longString = longString.concat("\n"); // new lines for formatting
+        }
+        return longString;
     }
 }
